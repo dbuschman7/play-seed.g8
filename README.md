@@ -16,8 +16,6 @@ or
 g8 dbuschman7/scala-seed  # for Scala 2.x
 ```
 
-[![Watch on YouTube](resources/thumbnail_youtube.jpg)](https://www.youtube.com/watch?v=nD-p-cEKjHE "Watch on YouTube")
-
 [g8]: http://www.foundweekends.org/giter8/
 [sbt]: https://www.scala-sbt.org/
 [scala]: https://www.scala-lang.org/
