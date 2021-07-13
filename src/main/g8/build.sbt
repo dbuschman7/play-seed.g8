@@ -2,18 +2,19 @@ import Dependencies._
 
 ThisBuild / organization := "$organization;format="lower,package"$"
 ThisBuild / scalaVersion := "2.13.6"
+ThisBuild / version := Version.dateVersioning
 
 lazy val `$name;format="norm"$` =
   project
+    .enablePlugins(JavaAppPackaging, BuildInfoPlugin, DockerPlugin)
     .in(file("."))
     .settings(name := "$name$")
     .settings(commonSettings)
     .settings(dependencies)
+    .settings(BuildInfo.settings(name, version, ThisBuild / scalaVersion, sbtVersion))
 
 lazy val commonSettings = Seq(
-  addCompilerPlugin(com.olegpy.`better-monadic-for`),
-  addCompilerPlugin(org.augustjune.`context-applied`),
-  addCompilerPlugin(org.typelevel.`kind-projector`),
+  // addCompilerPlugin(org.typelevel.`kind-projector`),
   update / evictionWarningOptions := EvictionWarningOptions.empty,
   Compile / console / scalacOptions := {
     (Compile / console / scalacOptions)
@@ -28,13 +29,32 @@ lazy val commonSettings = Seq(
 
 lazy val dependencies = Seq(
   libraryDependencies ++= Seq(
+    com.softwaremill.quicklens,
+    dev.zio.zio,
+    Dependencies.io.scalaland.chimney,
+    com.softwaremill.quicklens,
+    com.lihaoyi.`ammonite-ops`,
+    //
     // main dependencies
+    //
   ),
   libraryDependencies ++= Seq(
-    com.github.alexarchambault.`scalacheck-shapeless_1.15`,
     org.scalacheck.scalacheck,
     org.scalatest.scalatest,
     org.scalatestplus.`scalacheck-1-15`,
-    org.typelevel.`discipline-scalatest`,
   ).map(_ % Test),
 )
+
+onLoadMessage +=
+  s"""|
+      |╭─────────────────────────────────────
+      |│ App \${name.value}
+      |├─────────────────┬───────────────────
+      |│ Scala Version   │ \${scalaVersion.value}
+      |│ Sbt Version     │ \${sbtVersion.value}
+      |│ App Version     │ \${Version.dateVersioning}
+      |├─────────────────┼───────────────────
+      |│ Git Branch      │ \${BuildInfo.branch}
+      |│ Git Commit      │ \${BuildInfo.commit}
+      |│ Has Uncommitted │ \${BuildInfo.hasUnCommitted}
+      |╰─────────────────┴───────────────────""".stripMargin

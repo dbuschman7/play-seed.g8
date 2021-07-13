@@ -1,12 +1,10 @@
 package $package;format="lower,package"$
 package $name;format="lower,word"$
 
-import org.scalacheck.ScalacheckShapeless
 import org.scalatest._
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
-import org.typelevel.discipline.scalatest.FunSuiteDiscipline
 
 trait TestSuite
     extends AnyFunSuite
@@ -14,9 +12,7 @@ trait TestSuite
        with GivenWhenThen
        with BeforeAndAfterAll
        with BeforeAndAfterEach
-       with ScalaCheckPropertyChecks
-       with ScalacheckShapeless
-       with FunSuiteDiscipline {
+       with ScalaCheckPropertyChecks {
   final protected type Arbitrary[A] =
     org.scalacheck.Arbitrary[A]
 

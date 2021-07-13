@@ -3,10 +3,6 @@ import sbt._
 object Dependencies {
   case object com {
     case object github {
-      case object alexarchambault {
-        val `scalacheck-shapeless_1.15` =
-          "com.github.alexarchambault" %% "scalacheck-shapeless_1.15" % "1.3.0"
-      }
 
       case object liancheng {
         val `organize-imports` =
@@ -14,17 +10,48 @@ object Dependencies {
       }
     }
 
-    case object olegpy {
-      val `better-monadic-for` =
-        "com.olegpy" %% "better-monadic-for" % "0.3.1"
+    case object lihaoyi {
+      val `ammonite-ops` = "com.lihaoyi" %% "ammonite-ops" % "2.4.0"
+    }
+
+    case object softwaremill {
+      val quicklens = "com.softwaremill.quicklens" %% "quicklens" % "1.7.4"
+    }
+
+    case object typesafe {
+      case object Akka {
+        val version = "2.6.15"
+        val akka = "com.typesafe.akka" %% "akka" % version
+        val streams = "com.typesafe.akka" %% "akka-stream" % version
+        val http = "com.typesafe.akka" %% "akka-http" % "10.2.4"
+      }
+    }
+  }
+
+  case object dev {
+    case object zio {
+      val zio =
+        "dev.zio" %% "zio" % "1.0.9"
+
+      val `zio-config` =
+        "dev.zio" %% "zio-config" % "1.0.6"
+
+      val `zio-interop-cats` =
+        "dev.zio" %% "zio-interop-cats" % "3.1.1.0"
+
+      val `zio-streams` =
+        "dev.zio" %% "zio-streams" % "1.0.9"
+
+    }
+  }
+
+  case object io {
+    case object scalaland {
+      val chimney = "io.scalaland" %% "chimney" % "0.6.1"
     }
   }
 
   case object org {
-    case object augustjune {
-      val `context-applied` =
-        "org.augustjune" %% "context-applied" % "0.1.4"
-    }
 
     case object scalacheck {
       val scalacheck =
@@ -41,12 +68,5 @@ object Dependencies {
         "org.scalatestplus" %% "scalacheck-1-15" % "3.2.9.0"
     }
 
-    case object typelevel {
-      val `discipline-scalatest` =
-        "org.typelevel" %% "discipline-scalatest" % "2.1.5"
-
-      val `kind-projector` =
-        "org.typelevel" %% "kind-projector" % "0.13.0" cross CrossVersion.full
-    }
   }
 }
