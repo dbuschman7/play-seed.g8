@@ -8,14 +8,12 @@ All versions will always stay hardcoded as opposed to being chooseable or automa
 
 ```bash
 sbt new dbuschman7/scala-seed.g8  # for Scala 2.x
-sbt new dbuschman7/scala3-seed.g8 # for Scala 3.x
 ```
 
 or
 
 ```bash
 g8 dbuschman7/scala-seed  # for Scala 2.x
-g8 dbuschman7/scala3-seed # for Scala 3.x
 ```
 
 [![Watch on YouTube](resources/thumbnail_youtube.jpg)](https://www.youtube.com/watch?v=nD-p-cEKjHE "Watch on YouTube")
