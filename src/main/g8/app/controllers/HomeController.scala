@@ -1,6 +1,6 @@
 package controllers
 
-import com.myapp.play.{BusinessLogic, TestInput}
+import $package;format="lower,package"$.$name;format="lower,word"$.{BusinessLogic, TestInput}
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
 
@@ -19,14 +19,14 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)
    * Simple example of an action that can't fail.
    *
    * In cURL:
-   * $ curl localhost:9000
+   * \$ curl localhost:9000
    */
   def index(): Action[AnyContent] =
     Action
       .zioTask { _ =>
         BusinessLogic
           .computeSum(1, 2)
-          .map { int: Int => Ok(s"1 + 2 = $int") }
+          .map[Result] { int: Int => Ok(s"1 + 2 = \${int.toString}") }
       }
 
   /**
@@ -35,15 +35,15 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)
    * Note that if the `fold` is removed, ZIO complains that the error must be handled.
    *
    * Try these examples in cURL:
-   * $ curl localhost:9000 -H "Content-Type: application/json" -d '{"input": "testing"}'
-   * $ curl localhost:9000 -H "Content-Type: application/json" -d '{"foo": "bar"}'
+   * \$ curl localhost:9000 -H "Content-Type: application/json" -d '{"input": "testing"}'
+   * \$ curl localhost:9000 -H "Content-Type: application/json" -d '{"foo": "bar"}'
    */
   def testJson(): Action[JsValue] =
     Action
-      .zioTask(controllerComponents.parsers.json) { request =>
+      .zioTaskBodyParser[JsValue](controllerComponents.parsers.json) { request =>
         BusinessLogic
           .objectTransformation(request.body.validate[TestInput])
-          .fold(
+          .fold[Result](
             error => BadRequest(Json.toJson(error)),
             success => Ok(Json.toJson(success))
           )

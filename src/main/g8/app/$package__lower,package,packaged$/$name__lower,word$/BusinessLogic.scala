@@ -8,14 +8,14 @@ object BusinessLogic {
 
   def computeSum(num1: Int, num2: Int): ZIO[Any, Nothing, Int] =
     for {
-      one <- ZIO.succeed(num1)
-      two <- ZIO.succeed(num2)
+      one <- ZIO.succeed[Int](num1)
+      two <- ZIO.succeed[Int](num2)
     } yield one + two
 
-  def objectTransformation[A](input: JsResult[TestInput]): ZIO[Any, TestError, TestOutput] =
+  def objectTransformation(input: JsResult[TestInput]): ZIO[Any, TestError, TestOutput] =
     input match {
-      case JsSuccess(value, _) => ZIO.succeed(TestOutput(s"Hello, ${value.input}"))
-      case JsError(_) => ZIO.fail(TestError("Invalid JSON input."))
+      case JsSuccess(value, _) => ZIO.succeed[TestOutput](TestOutput(s"Hello, \${value.input}"))
+      case JsError(_) => ZIO.fail[TestError](TestError("Invalid JSON input."))
     }
 
 }

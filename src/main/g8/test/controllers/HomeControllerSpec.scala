@@ -1,12 +1,14 @@
 package controllers
 
+import $package;format="lower,package"$.$name;format="lower,word"$.{TestInput, TestOutput}
 import akka.stream.Materializer
-import controllers.HomeController.{TestInput, TestOutput}
 import org.scalatestplus.play._
-import org.scalatestplus.play.guice._
+import org.scalatestplus.play.guice.GuiceOneAppPerTest
 import play.api.libs.json.Json
 import play.api.test._
 import play.api.test.Helpers._
+
+import scala.concurrent.Future
 
 /**
  * Add your spec here.
@@ -38,7 +40,7 @@ class HomeControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecting
 
     "render the index page from the router" in {
       val request = FakeRequest(GET, "/")
-      val home = route(app, request).get
+      val home = route(app, request).getOrElse(Future failed(new Exception("error")))
 
       status(home) mustBe OK
       contentType(home) mustBe Some("text/plain")

@@ -4,7 +4,7 @@ ThisBuild / scalaVersion := "2.12.14"
 ThisBuild / useSuperShell := false
 ThisBuild / autoStartServer := false
 
-name := "scala-seed"
+name := "play-seed"
 
 addCommandAlias("test", "g8Test")
 

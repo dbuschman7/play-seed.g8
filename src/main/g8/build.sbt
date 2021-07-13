@@ -12,6 +12,12 @@ lazy val `$name;format="norm"$` =
     .settings(commonSettings)
     .settings(dependencies)
     .settings(libraryDependencies += guice)
+    .settings( 
+      wartremoverExcluded += crossTarget.value / "routes" / "main" / "router" / "Routes.scala",
+      wartremoverExcluded += crossTarget.value / "routes" / "main" / "router" / "RoutesPrefix.scala",
+      wartremoverExcluded += crossTarget.value / "routes" / "main" / "controllers" / "ReverseRoutes.scala",
+      wartremoverExcluded += crossTarget.value / "routes" / "main" / "controllers" / "javascript" / "JavaScriptReverseRoutes.scala",
+    )
     .settings(BuildInfo.settings(name, version, ThisBuild / scalaVersion, sbtVersion))
 
 lazy val commonSettings = Seq(
