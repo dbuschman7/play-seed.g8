@@ -12,4 +12,7 @@ addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.1")
 addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.3")
 addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.4.15")
 addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.10.0")
-addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.8.0")
+
+addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.8.8")
+addSbtPlugin("org.foundweekends.giter8" % "sbt-giter8-scaffold" % "0.11.0")
+

@@ -6,11 +6,12 @@ ThisBuild / version := Version.dateVersioning
 
 lazy val `$name;format="norm"$` =
   project
-    .enablePlugins(JavaAppPackaging, BuildInfoPlugin, DockerPlugin)
+    .enablePlugins(PlayScala, BuildInfoPlugin, DockerPlugin)
     .in(file("."))
     .settings(name := "$name$")
     .settings(commonSettings)
     .settings(dependencies)
+    .settings(libraryDependencies += guice)
     .settings(BuildInfo.settings(name, version, ThisBuild / scalaVersion, sbtVersion))
 
 lazy val commonSettings = Seq(
@@ -42,6 +43,7 @@ lazy val dependencies = Seq(
     org.scalacheck.scalacheck,
     org.scalatest.scalatest,
     org.scalatestplus.`scalacheck-1-15`,
+    org.scalatestplus.scalatestplus,
   ).map(_ % Test),
 )
 
