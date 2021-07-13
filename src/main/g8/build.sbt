@@ -52,7 +52,7 @@ onLoadMessage +=
       |├─────────────────┬───────────────────
       |│ Scala Version   │ \${scalaVersion.value}
       |│ Sbt Version     │ \${sbtVersion.value}
-      |│ App Version     │ \${Version.dateVersioning}
+      |│ App Version     │ \${version.value}
       |├─────────────────┼───────────────────
       |│ Git Branch      │ \${BuildInfo.branch}
       |│ Git Commit      │ \${BuildInfo.commit}
