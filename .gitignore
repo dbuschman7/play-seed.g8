@@ -8,5 +8,6 @@
 *.worksheet.sc
 metals.sbt
 target/
-
+logs/
+version.txt
 .DS_Store
