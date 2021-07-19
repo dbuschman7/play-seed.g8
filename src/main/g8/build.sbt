@@ -1,8 +1,13 @@
 import Dependencies._
+import sbt._
+import sbt.Keys._ 
+
 
 ThisBuild / organization := "$organization;format="lower,package"$"
 ThisBuild / scalaVersion := "2.13.6"
 ThisBuild / version := Version.dateVersioning
+
+val cdkSynth = taskKey[Unit]("Run CDK synth command for this project")
 
 lazy val `$name;format="norm"$` =
   project
@@ -27,23 +32,32 @@ lazy val commonSettings = Seq(
     (Compile / console / scalacOptions).value,
 )
 
-lazy val dependencies = Seq(
+lazy val dependencies = 
+  //
+  // Main deps 
+  // 
+  Seq(
   libraryDependencies ++= Seq(
     com.softwaremill.quicklens,
     dev.zio.zio,
     Dependencies.io.scalaland.chimney,
     com.softwaremill.quicklens,
     com.lihaoyi.`ammonite-ops`,
-    //
-    // main dependencies
-    //
   ),
+    //
+    // Test Deps
+    // 
   libraryDependencies ++= Seq(
     org.scalacheck.scalacheck,
     org.scalatest.scalatest,
     org.scalatestplus.`scalacheck-1-15`,
   ).map(_ % Test),
+  //
+  libraryDependencies ++= CDK.cdkDeps.map(_ % Test),  // CDK libs 
 )
+
+
+
 
 onLoadMessage +=
   s"""|
