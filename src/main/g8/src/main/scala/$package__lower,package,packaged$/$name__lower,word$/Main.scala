@@ -1,10 +1,20 @@
 package $package;format="lower,package"$
 package $name;format="lower,word"$
 
-object Main extends App {
-  println("─" * 100)
+import zio.console._
 
-  println("hello world")
+object Main extends zio.App {
 
-  println("─" * 100)
+  val myAppLogic =
+    for {
+      _ <- putStrLn("─" * 100)
+      _ <- putStrLn("hello world")
+      _ <- putStrLn("─" * 100)
+    } yield ()
+
+  def run(args: List[String]) = 
+    myAppLogic.exitCode
+
 }
+
+

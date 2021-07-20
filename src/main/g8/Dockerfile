@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-slim AS build
+FROM openjdk:11-jdk AS build
 USER root
 
 WORKDIR /opt/build
@@ -14,12 +14,12 @@ RUN mkdir -p                                       /root/.sbt/launchers/1.5.4   
  && cp /opt/build/devOps/sbt-launch-1.5.4.jar.md5  /root/.sbt/launchers/1.5.4/sbt-launch.jar.md5 \
  && cp /opt/build/devOps/sbt                       /opt/build/sbt
 
-RUN  /opt/build/sbt -v -213 -no-colors -batch -sbt-version 1.5.4 -J-Xmx4096M 'compile'
+ENV USE_EXISTING_VERSION=true
 RUN  /opt/build/sbt -v -213 -no-colors -batch -sbt-version 1.5.4 -J-Xmx4096M 'docker:stage'
 
 #####################################################
 # Taken from Play app's build script sinec it is good standard to start with
-FROM openjdk:11-jdk-slim AS persmissions
+FROM openjdk:11-jdk AS persmissions
 WORKDIR /opt/docker
 #COPY --from=build --chown=root:root  /opt/build/target/docker/stage/opt /opt
 COPY --from=build --chown=root:root  /opt/build/target/docker/stage/1/opt /opt
