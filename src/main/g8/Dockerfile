@@ -21,9 +21,9 @@ RUN  /opt/build/sbt -v -213 -no-colors -batch -sbt-version 1.5.4 -J-Xmx4096M 'do
 # Taken from Play app's build script sinec it is good standard to start with
 FROM openjdk:11-jdk-slim AS persmissions
 WORKDIR /opt/docker
-#COPY --from=build --chown=root:root  /opt/build/target/docker/stage/opt /opt
-COPY --from=build --chown=root:root  /opt/build/target/docker/stage/1/opt /opt
-COPY --from=build --chown=root:root  /opt/build/target/docker/stage/2/opt /opt
+COPY --from=build --chown=root:root  /opt/build/target/docker/stage/opt /opt
+#COPY --from=build --chown=root:root  /opt/build/target/docker/stage/1/opt /opt
+#COPY --from=build --chown=root:root  /opt/build/target/docker/stage/2/opt /opt
 USER root
 RUN ["rm", "-fr", "/opt/docker/share"]
 RUN ["chmod", "-R", "u=rX,g=rX", "/opt/docker"]
