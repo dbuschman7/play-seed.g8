@@ -1,7 +1,7 @@
 #!/bin/sh 
 set -x
 
-LOCAL_REPO="rr19"
+LOCAL_REPO="dave"
 
 PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 APP_NAME=$( basename -- $PROJECT_DIR )
