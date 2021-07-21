@@ -7,8 +7,6 @@ ThisBuild / organization := "$organization;format="lower,package"$"
 ThisBuild / scalaVersion := "2.13.6"
 ThisBuild / version := Version.dateVersioning
 
-val cdkSynth = taskKey[Unit]("Run CDK synth command for this project")
-
 lazy val `$name;format="norm"$` =
   project
     .enablePlugins(JavaAppPackaging, BuildInfoPlugin, DockerPlugin)
@@ -16,6 +14,12 @@ lazy val `$name;format="norm"$` =
     .settings(name := "$name$")
     .settings(commonSettings)
     .settings(dependencies)
+    .settings(
+       Compile / sources := Seq.empty,
+       doc / sources := Seq.empty,
+       Compile / publishArtifact := false,
+       packageDoc / publishArtifact := false,
+    )
     .settings(BuildInfo.settings(name, version, ThisBuild / scalaVersion, sbtVersion))
 
 lazy val commonSettings = Seq(
