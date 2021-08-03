@@ -16,7 +16,6 @@ lazy val `$name;format="norm"$` =
     .settings(dependencies)
     .settings(libraryDependencies += guice)
     .settings( 
-      Compile / sources := Seq.empty,
       doc / sources := Seq.empty,
       Compile / publishArtifact := false,
       packageDoc / publishArtifact := false,
