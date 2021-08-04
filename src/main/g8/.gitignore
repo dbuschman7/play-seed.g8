@@ -9,3 +9,4 @@
 metals.sbt
 target/
 version.txt
+.DS_Store
