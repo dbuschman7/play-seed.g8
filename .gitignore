@@ -11,3 +11,4 @@ target/
 logs/
 version.txt
 .DS_Store
+.history/
