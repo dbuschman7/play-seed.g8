@@ -12,3 +12,4 @@ logs/
 version.txt
 .DS_Store
 logs/*.log
+.history/
